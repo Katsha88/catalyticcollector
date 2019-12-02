@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "607447002170",
+    "firebase_url": "https://catalytic-collector.firebaseio.com",
+    "project_id": "catalytic-collector",
+    "storage_bucket": "catalytic-collector.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607447002170:android:45ac0b18adb678e83a5903",
+        "android_client_info": {
+          "package_name": "com.catalyticcollector.catalytic_collector"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607447002170-8lmomu7ir5qvpq1e20od352rs7l62j3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU4rcX_OeGsCKlTD1LlRepxbcy2eQ8TNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607447002170-8lmomu7ir5qvpq1e20od352rs7l62j3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
