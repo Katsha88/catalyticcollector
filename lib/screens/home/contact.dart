@@ -15,7 +15,7 @@ class Contact extends StatelessWidget {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      throw 'Could not launch Sorry $url';
+      throw 'Could not launch  $url';
     }
   }
 
