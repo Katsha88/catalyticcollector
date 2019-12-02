@@ -38,7 +38,7 @@ class Contact extends StatelessWidget {
       print('launching apple url');
       await launch(appleUrl);
     } else {
-      throw 'Could not launch url';
+      throw 'Could not launch url Sorry';
     }
   }
 
