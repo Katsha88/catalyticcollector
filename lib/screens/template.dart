@@ -3,6 +3,8 @@ import 'home/home.dart';
 import 'home/search.dart';
 import 'home/about.dart';
 import 'home/contact.dart';
+import 'home/industrial.dart';
+import 'home/contact2.dart';
 
 
 import 'dart:async';
@@ -18,7 +20,7 @@ class Template extends StatefulWidget {
 class TemplateState extends State<Template> {
   int _selectedTab = 0;
   final _pageOptions = [
-Search(), About(), Contact()
+Search(), About(),Industrial(), Contact2()
 
   ];
   @override

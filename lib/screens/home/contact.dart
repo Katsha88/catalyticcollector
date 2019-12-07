@@ -6,6 +6,7 @@ import 'package:catalytic_collector/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:carousel_pro/carousel_pro.dart';
 
 class Contact extends StatelessWidget {
   final AuthService _auth = AuthService();

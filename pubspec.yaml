@@ -24,6 +24,8 @@ dependencies:
   provider: ^3.1.0
   flutter_spinkit: ^4.0.0
   url_launcher: ^5.1.2
+  carousel_pro: ^1.0.0
+  flutter_launcher_icons: ^0.7.2+1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -34,6 +36,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+flutter_icons:
+  image_path: "assets/3.jpg"
+  android: true
+  ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
