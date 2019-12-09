@@ -1,14 +1,15 @@
-
-
 import 'package:catalytic_collector/models/brew.dart';
+import 'package:catalytic_collector/models/cata.dart';
+
 import 'package:catalytic_collector/screens/home/brew_list.dart';
+import 'package:catalytic_collector/screens/home/cata_list.dart';
 import 'package:catalytic_collector/screens/home/settings_form.dart';
 import 'package:catalytic_collector/services/auth.dart';
-import 'package:catalytic_collector/services/database.dart';
+import 'package:catalytic_collector/services/database2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatelessWidget {
+class Search2 extends StatelessWidget {
 
   final AuthService _auth = AuthService();
 
@@ -24,13 +25,13 @@ class Home extends StatelessWidget {
       });
     }
 
-    return StreamProvider<List<Brew>>.value(
-      value: DatabaseService().brews,
+    return StreamProvider<List<Cata>>.value(
+      value: DatabaseService2().catas,
       child: Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(
-          title: Text('Brew Crew'),
-          backgroundColor: Colors.brown[400],
+          title: Text('Catalytic Collector'),
+          backgroundColor: Colors.lightBlue,
           elevation: 0.0,
           actions: <Widget>[
             FlatButton.icon(
@@ -50,11 +51,11 @@ class Home extends StatelessWidget {
         body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/coffee_bg.png'),
+                image: AssetImage('assets/Stone.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
-            child: BrewList()
+            child: CataList()
         ),
       ),
     );
