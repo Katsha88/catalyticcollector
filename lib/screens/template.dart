@@ -21,7 +21,7 @@ class Template extends StatefulWidget {
 class TemplateState extends State<Template> {
   int _selectedTab = 0;
   final _pageOptions = [
-Search3(), About(),Industrial(), Contact2()
+Search2(), About(),Industrial(), Contact2()
 
   ];
   @override

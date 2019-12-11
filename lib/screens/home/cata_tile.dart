@@ -10,18 +10,20 @@ class CataTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Card(
         margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
         child: ListTile(
           leading: CircleAvatar(
-            radius: 25.0,
-            backgroundColor: Colors.brown,
-            backgroundImage: AssetImage('assets/coffee_icon.png'),
+            radius: 25,
+            backgroundColor: Colors.transparent,
+            backgroundImage: NetworkImage(cata.images),
           ),
-          title: Text(cata.categories),
-          subtitle: Text('Takes ${cata.categories} sugar(s)'),
+
+          title: Text(cata.name + "\n" + cata.categories),
+          subtitle: Text(cata.description),
         ),
       ),
     );
