@@ -1,21 +1,28 @@
 import 'package:catalytic_collector/models/brew.dart';
 import 'package:catalytic_collector/models/cata.dart';
-
 import 'package:catalytic_collector/screens/home/brew_list.dart';
 import 'package:catalytic_collector/screens/home/cata_list.dart';
 import 'package:catalytic_collector/screens/home/droplist.dart';
 import 'package:catalytic_collector/screens/home/settings_form.dart';
+import 'package:catalytic_collector/screens/home/test3.dart';
 import 'package:catalytic_collector/services/auth.dart';
 import 'package:catalytic_collector/services/database2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Search2 extends StatelessWidget {
+class Search4 extends StatelessWidget {
 
   final AuthService _auth = AuthService();
+  String brave;
+
+  Search4({this.brave});
+
 
   @override
   Widget build(BuildContext context) {
+
+
+
 
     void _showSettingsPanel() {
       showModalBottomSheet(context: context, builder: (context) {
@@ -27,7 +34,7 @@ class Search2 extends StatelessWidget {
     }
 
     return StreamProvider<List<Cata>>.value(
-      value: DatabaseService2().catas,
+      value: DatabaseService2(toshorten:  brave).catas,
       child: Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(
@@ -50,18 +57,29 @@ class Search2 extends StatelessWidget {
           ],
         ),
         body:
+            Column(
+              children: <Widget>[
 
-                Container(
 
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/Stone.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                Flexible(
+                   child:Container(
+                       decoration: BoxDecoration(
+                         image: DecorationImage(
+                           image: AssetImage('assets/Stone.jpg'),
+                           fit: BoxFit.cover,
+                         ),
+                       ),
+                       child: CataList()
+                   ),
 
-                    child: CataList()
-                ),
+                )
+
+
+
+              ],
+            )
+
+
 
       ),
     );

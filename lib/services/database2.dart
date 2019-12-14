@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:catalytic_collector/models/brew.dart';
 import 'package:catalytic_collector/models/cata.dart';
 import 'package:catalytic_collector/models/user.dart';
@@ -5,7 +7,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService2 {
 
-
+  final String toshorten;
+  DatabaseService2({ this.toshorten });
 
   // collection reference
   final CollectionReference brewCollection = (Firestore.instance.collection('Items'));
@@ -30,8 +33,14 @@ class DatabaseService2 {
   // user data from snapshots
 
   Stream<List<Cata>> get catas {
-    return brewCollection.where("Categories",isEqualTo:"Volkswagen" ).snapshots()
-        .map(_cataListFromSnapshot);
+    if (toshorten=="All") {
+      return brewCollection.snapshots()
+          .map(_cataListFromSnapshot);
+    }
+
+    else {
+    return brewCollection.where("Categories",isEqualTo:toshorten ).snapshots()
+        .map(_cataListFromSnapshot);}
   }
 
 
