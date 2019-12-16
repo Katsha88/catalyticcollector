@@ -4,11 +4,17 @@ import 'package:catalytic_collector/models/brew.dart';
 import 'package:catalytic_collector/models/cata.dart';
 import 'package:catalytic_collector/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:algolia/algolia.dart';
+
+
 
 class DatabaseService2 {
 
+  RegExp regsearch = RegExp(".*");
+
+final String searchitem; // for searching about item
   final String toshorten;
-  DatabaseService2({ this.toshorten });
+  DatabaseService2({ this.toshorten , this.searchitem});
 
   // collection reference
   final CollectionReference brewCollection = (Firestore.instance.collection('Items'));
@@ -17,7 +23,7 @@ class DatabaseService2 {
 
     return snapshot.documents.map((doc){
       String g = doc.data["Images1"];
-      g =  g = g.replaceAll("https://", "https://i0.wp.com/");
+      g =g.replaceAll("https://", "https://i0.wp.com/");
       //print(doc.data);
       return Cata(
           name: doc.data['Name'] ?? "0",
@@ -33,14 +39,36 @@ class DatabaseService2 {
   // user data from snapshots
 
   Stream<List<Cata>> get catas {
+
+
     if (toshorten=="All") {
-      return brewCollection.snapshots()
-          .map(_cataListFromSnapshot);
+if ( searchitem == ""){
+  return brewCollection.orderBy("Name").snapshots()
+      .map(_cataListFromSnapshot);
+
+}
+else{        return brewCollection.orderBy("Name").startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
+    .map(_cataListFromSnapshot);
+}
+
+
+
+
+
     }
 
+
+
     else {
-    return brewCollection.where("Categories",isEqualTo:toshorten ).snapshots()
-        .map(_cataListFromSnapshot);}
+
+      if ( searchitem == ""){
+        return brewCollection.where("Categories",isEqualTo:toshorten ).orderBy("Name").snapshots()
+            .map(_cataListFromSnapshot);
+
+      }
+      else{    return brewCollection.where("Categories",isEqualTo:toshorten ).orderBy('Name').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
+          .map(_cataListFromSnapshot);}}
+
   }
 
 

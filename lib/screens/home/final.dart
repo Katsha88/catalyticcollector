@@ -74,6 +74,7 @@ class Company {
 
 class FinalState extends State<Final> {
   final AuthService _auth = AuthService();
+  String itemsearch="";  // variable for searching about Item
 
   //
   List<Company> _companies = Company.getCompanies();
@@ -123,7 +124,7 @@ class FinalState extends State<Final> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Cata>>.value(
-      value: DatabaseService2(toshorten: todata).catas,
+      value: DatabaseService2(toshorten: todata , searchitem: itemsearch).catas,
       child: Scaffold(
           backgroundColor: Colors.brown[50],
           appBar: AppBar(
@@ -155,13 +156,15 @@ class FinalState extends State<Final> {
                         decoration: textInputDecoration.copyWith(hintText: "Enter your product name"),
                         validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
                         onChanged: (val) {
-                          setState(() => null);
+                          setState(() => itemsearch = val);
                         },
                       ),
+
+
                       SizedBox(
                         height: 10.0,
                       ),
-                      Text("Choose a brand"),
+                      Text("Please Choose Brand"),
                       SizedBox(
                         height: 10.0,
                       ),
