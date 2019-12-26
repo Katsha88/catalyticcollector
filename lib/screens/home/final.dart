@@ -1,5 +1,6 @@
 import 'package:catalytic_collector/screens/home/search4.dart';
 import 'package:catalytic_collector/shared/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:catalytic_collector/models/brew.dart';
 import 'package:catalytic_collector/models/cata.dart';
@@ -12,6 +13,7 @@ import 'package:catalytic_collector/services/auth.dart';
 import 'package:catalytic_collector/services/database2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'brand.dart';
 
 
 class Final extends StatefulWidget {
@@ -74,19 +76,20 @@ class Company {
 
 class FinalState extends State<Final> {
   final AuthService _auth = AuthService();
-  String itemsearch="";  // variable for searching about Item
+  static String itemsearch="";  // variable for searching about Item
 
   //
   List<Company> _companies = Company.getCompanies();
   List<DropdownMenuItem<Company>> _dropdownMenuItems;
   Company _selectedCompany;
-  String todata;
+  static String todata;
+  int i =Brand.j;
 
   @override
   void initState() {
     _dropdownMenuItems = buildDropdownMenuItems(_companies);
-    _selectedCompany = _dropdownMenuItems[0].value;
-    todata = "All";
+    _selectedCompany = _dropdownMenuItems[i].value;
+    todata = _selectedCompany.name;
     super.initState();
   }
 
@@ -150,11 +153,12 @@ class FinalState extends State<Final> {
             children: <Widget>[
               Container(
                 child: Center(
-                  child: Column(
+                  child: ListView(
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
+                    shrinkWrap: true,
                     children: <Widget>[
                       TextFormField(
                         decoration: textInputDecoration.copyWith(hintText: "Enter your product name"),
-                        validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
                         onChanged: (val) {
                           setState(() => itemsearch = val);
                         },

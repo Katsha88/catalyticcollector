@@ -4,7 +4,9 @@ import 'package:catalytic_collector/models/brew.dart';
 import 'package:catalytic_collector/models/cata.dart';
 import 'package:catalytic_collector/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:algolia/algolia.dart';
+import 'package:async/async.dart';
+import 'package:catalytic_collector/screens/home/final.dart';
+
 
 
 
@@ -47,7 +49,9 @@ if ( searchitem == ""){
       .map(_cataListFromSnapshot);
 
 }
-else{        return brewCollection.orderBy("Name").startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
+else{
+
+  return brewCollection.orderBy("Name").startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
     .map(_cataListFromSnapshot);
 }
 
@@ -62,16 +66,26 @@ else{        return brewCollection.orderBy("Name").startAt([searchitem]).endAt([
     else {
 
       if ( searchitem == ""){
-        return brewCollection.where("Categories",isEqualTo:toshorten ).orderBy("Name").snapshots()
+        return brewCollection.orderBy("Name").where("Categories",isEqualTo:toshorten ).snapshots()
             .map(_cataListFromSnapshot);
 
       }
-      else{    return brewCollection.where("Categories",isEqualTo:toshorten ).orderBy('Name').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
-          .map(_cataListFromSnapshot);}}
+      else{
+         DatabaseService2(toshorten: FinalState.todata, searchitem: FinalState.itemsearch).lala;
+
+        return brewCollection.orderBy('Name').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
+          .map(_cataListFromSnapshot);}
+
+
+    }
+
+
 
   }
-
-
+  Stream<List<Cata>> get lala{
+    return brewCollection.orderBy('Name').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
+        .map(_cataListFromSnapshot);
+  }
   // get user doc stream
 
 

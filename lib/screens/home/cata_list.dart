@@ -3,6 +3,7 @@ import 'package:catalytic_collector/screens/home/brew_tile.dart';
 import 'package:catalytic_collector/screens/home/cata_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'cata_tile2.dart';
 
 
 
@@ -20,7 +21,7 @@ class _CataListState extends State<CataList> {
     return ListView.builder(
       itemCount: catas.length,
       itemBuilder: (context, index) {
-        return CataTile(cata: catas[index]);
+        return CataTile2(cata: catas[index]);
       },
     );
   }

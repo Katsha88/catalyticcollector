@@ -3,6 +3,7 @@ import 'package:catalytic_collector/screens/home/final.dart';
 import 'package:catalytic_collector/screens/home/search2.dart';
 import 'package:catalytic_collector/screens/home/search4.dart';
 import 'package:flutter/material.dart';
+import 'home/brand.dart';
 import 'home/droplist.dart';
 import 'home/home.dart';
 import 'home/search3.dart';
@@ -26,7 +27,7 @@ class TemplateState extends State<Template> {
   int _selectedTab = 0;
   final _pageOptions = [
 
-    Final(), About(),Industrial(), Contact2()
+    Final(), Brand(),About(), Contact2()
 
   ];
   @override
@@ -61,11 +62,11 @@ class TemplateState extends State<Template> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.info),
-              title: Text('About us'),
+              title: Text('Brand'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
-              title: Text('INDUSTRIAL CATALYST'),
+              title: Text('About'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.phone),
