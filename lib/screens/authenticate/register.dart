@@ -1,4 +1,4 @@
-import 'package:catalytic_collector/services/auth.dart';
+import 'package:catalytic_collector/services/auth1.dart';
 import 'package:catalytic_collector/shared/constants.dart';
 import 'package:catalytic_collector/shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class Register extends StatefulWidget {
 
 class RegisterState extends State<Register> {
 
-  final AuthService _auth = AuthService();
+  final AuthService1 _auth = AuthService1();
   final _formKey = GlobalKey<FormState>();
   String error = '';
   bool loading = false;
@@ -94,7 +94,7 @@ class RegisterState extends State<Register> {
                 onPressed: () async {
                   if(_formKey.currentState.validate()){
                     setState(() => loading = true);
-                    dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                    dynamic result = await _auth.registerWithEmailAndPassword(email, password, name, phone);
                     if(result == null) {
                       setState(() {
                         loading = false;

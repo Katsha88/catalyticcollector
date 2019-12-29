@@ -1,4 +1,4 @@
-import 'package:catalytic_collector/services/auth.dart';
+import 'package:catalytic_collector/services/auth1.dart';
 import 'package:catalytic_collector/shared/constants.dart';
 import 'package:catalytic_collector/shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
-  final AuthService _auth = AuthService();
+  final AuthService1 _auth = AuthService1();
   final _formKey = GlobalKey<FormState>();
   String error = '';
   bool loading = false;

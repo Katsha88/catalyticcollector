@@ -7,7 +7,7 @@ import 'package:catalytic_collector/models/cata.dart';
 import 'package:catalytic_collector/screens/home/brew_list.dart';
 import 'package:catalytic_collector/screens/home/cata_list.dart';
 import 'package:catalytic_collector/screens/home/droplist.dart';
-import 'package:catalytic_collector/screens/home/settings_form.dart';
+import 'package:catalytic_collector/screens/home/setting_form1.dart';
 import 'package:catalytic_collector/screens/home/test3.dart';
 import 'package:catalytic_collector/services/auth.dart';
 import 'package:catalytic_collector/services/database2.dart';
@@ -112,7 +112,7 @@ class FinalState extends State<Final> {
         builder: (context) {
           return Container(
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-            child: SettingsForm(),
+            child: SettingsForm1(),
           );
         });
   }
