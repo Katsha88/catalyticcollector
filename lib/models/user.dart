@@ -8,6 +8,7 @@ class User {
 
 class UserData {
 
+
   final String uid;
   final String name;
   final String sugars;
