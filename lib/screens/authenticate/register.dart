@@ -20,8 +20,11 @@ class _RegisterState extends State<Register> {
   bool loading = false;
 
   // text field state
+  String name ='';
   String email = '';
   String password = '';
+  String phone= '';
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,7 @@ class _RegisterState extends State<Register> {
                 decoration: textInputDecoration.copyWith(hintText: 'name'),
                 validator: (val) => val.isEmpty ? 'Enter your name' : null,
                 onChanged: (val) {
-                  setState(() => email = val);
+                  setState(() => name = val);
                 },
               ),
 
@@ -69,7 +72,7 @@ class _RegisterState extends State<Register> {
                 decoration: textInputDecoration.copyWith(hintText: 'Phone'),
                 validator: (val) => val.isEmpty ? 'Enter an Phone' : null,
                 onChanged: (val) {
-              
+                  setState(() => phone = val);
                 },
               ),
               SizedBox(height: 20.0),

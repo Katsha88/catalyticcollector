@@ -28,7 +28,7 @@ final String searchitem; // for searching about item
       g =g.replaceAll("https://", "https://i0.wp.com/");
       //print(doc.data);
       return Cata(
-          name: doc.data['Name'] ?? "0",
+          name: doc.data['Meta: meta_title'] ?? "0",
           categories: (doc.data['Categories']) ?? '0',
           description: doc.data["Short description"] ?? '0',
         images: g ?? "https://image.shutterstock.com/image-vector/no-photography-video-260nw-1161043789.jpg"
@@ -45,13 +45,13 @@ final String searchitem; // for searching about item
 
     if (toshorten=="All") {
 if ( searchitem == ""){
-  return brewCollection.orderBy("Name").snapshots()
+  return brewCollection.orderBy("Meta: meta_title").snapshots()
       .map(_cataListFromSnapshot);
 
 }
 else{
 
-  return brewCollection.orderBy("Name").startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
+  return brewCollection.orderBy("Meta: meta_title").startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
     .map(_cataListFromSnapshot);
 }
 
@@ -66,14 +66,14 @@ else{
     else {
 
       if ( searchitem == ""){
-        return brewCollection.orderBy("Name").where("Categories",isEqualTo:toshorten ).snapshots()
+        return brewCollection.orderBy("Meta: meta_title").where("Categories",isEqualTo:toshorten ).snapshots()
             .map(_cataListFromSnapshot);
 
       }
       else{
          DatabaseService2(toshorten: FinalState.todata, searchitem: FinalState.itemsearch).lala;
 
-        return brewCollection.orderBy('Name').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
+        return brewCollection.orderBy('Meta: meta_title').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
           .map(_cataListFromSnapshot);}
 
 
@@ -83,7 +83,7 @@ else{
 
   }
   Stream<List<Cata>> get lala{
-    return brewCollection.orderBy('Name').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
+    return brewCollection.orderBy('Meta: meta_title').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
         .map(_cataListFromSnapshot);
   }
   // get user doc stream

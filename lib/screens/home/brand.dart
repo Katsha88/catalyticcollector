@@ -12,21 +12,22 @@ import 'package:catalytic_collector/screens/template.dart';
 
 class Brand extends StatelessWidget {
   final AuthService _auth = AuthService();
-  static int j=0 ;
-  Future <void> changej() {
-    j= 5;
+  static int j = 0;
 
+  Future<void> changej() {
+    j = 5;
   }
-
 
   @override
   Widget build(BuildContext context) {
     var spacecrafts = [
+      "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/mercedes-benz-logo-1.png",
+      "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/Mitsubishi-logo-1.png",
       "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/KiaHyundai-logo-1.png",
       "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/Isuzu-Logo-1.png",
       "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/Alfa-Romeo-Logo-1.png",
-      "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/mercedes-benz-logo-1.png",
-      "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/Mitsubishi-logo-1.png",
+
+
       "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/Nissan-logo-1.png",
       "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/Proton-Logo-1.png",
       "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/chevy-logo-1.png",
@@ -60,23 +61,19 @@ class Brand extends StatelessWidget {
               child: new Image.network(spacecrafts[index]),
             ),
           ),
-          onTap:  ()  {
-j=5;
+          onTap: () {
+            FinalState.itemsearch ="";
+            j = index +1;
 
-            Navigator.push (
+            Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Template()),
-
-
             );
-
-
-
           },
         );
       },
     );
-j=7;
+    j = 7;
     void _showSettingsPanel() {
       showModalBottomSheet(
           context: context,
