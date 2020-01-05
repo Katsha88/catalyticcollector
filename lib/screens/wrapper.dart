@@ -1,4 +1,4 @@
-import 'package:catalytic_collector/models/user.dart';
+import 'package:catalytic_collector/models/User1.dart';
 import 'package:catalytic_collector/screens/authenticate/authenticate.dart';
 import 'package:catalytic_collector/screens/template.dart';
 
@@ -9,7 +9,7 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final user = Provider.of<User>(context);
+    final user = Provider.of<User1>(context);
     
     // return either the Home or Authenticate widget
     if (user == null){

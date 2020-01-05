@@ -1,4 +1,4 @@
-import 'package:catalytic_collector/models/user.dart';
+import 'package:catalytic_collector/models/User1.dart';
 import 'package:catalytic_collector/services/databaseuser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:catalytic_collector/screens/authenticate/register.dart';
@@ -8,12 +8,12 @@ class AuthService1 {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // create user obj based on firebase user
-  User _userFromFirebaseUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid) : null;
+  User1 _userFromFirebaseUser(FirebaseUser user) {
+    return user != null ? User1(uid: user.uid) : null;
   }
 
   // auth change user stream
-  Stream<User> get user {
+  Stream<User1> get user {
     return _auth.onAuthStateChanged
     //.map((FirebaseUser user) => _userFromFirebaseUser(user));
         .map(_userFromFirebaseUser);

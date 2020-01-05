@@ -1,4 +1,6 @@
+import 'package:catalytic_collector/models/parameter.dart';
 import 'package:catalytic_collector/screens/home/search4.dart';
+import 'package:catalytic_collector/services/datapara.dart';
 import 'package:catalytic_collector/shared/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +11,10 @@ import 'package:catalytic_collector/screens/home/cata_list.dart';
 import 'package:catalytic_collector/screens/home/droplist.dart';
 import 'package:catalytic_collector/screens/home/setting_form1.dart';
 import 'package:catalytic_collector/screens/home/test3.dart';
-import 'package:catalytic_collector/services/auth.dart';
+import 'package:catalytic_collector/services/auth1.dart';
 import 'package:catalytic_collector/services/database2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'brand.dart';
 
@@ -75,7 +78,7 @@ class Company {
 }
 
 class FinalState extends State<Final> {
-  final AuthService _auth = AuthService();
+  final AuthService1 _auth = AuthService1();
   static String itemsearch="";  // variable for searching about Item
 
   //
@@ -128,6 +131,10 @@ class FinalState extends State<Final> {
   Widget build(BuildContext context) {
     return StreamProvider<List<Cata>>.value(
       value: DatabaseService2(toshorten: todata , searchitem: itemsearch).catas,
+      child: StreamProvider <List<Parameter>>.value(
+
+          value: Datapara().paras,
+
       child: Scaffold(
           backgroundColor: Colors.brown[50],
           appBar: AppBar(
@@ -196,6 +203,6 @@ class FinalState extends State<Final> {
               )
             ],
           )),
-    );
+    ));
   }
 }

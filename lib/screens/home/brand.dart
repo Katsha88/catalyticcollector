@@ -1,22 +1,15 @@
-import 'package:catalytic_collector/models/brew.dart';
+import 'package:catalytic_collector/screens/home/setting_form1.dart';
+import 'package:catalytic_collector/services/auth1.dart';
 
-import 'package:catalytic_collector/screens/home/brew_list.dart';
-import 'package:catalytic_collector/screens/home/settings_form.dart';
-import 'package:catalytic_collector/services/auth.dart';
-import 'package:catalytic_collector/services/database.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'final.dart';
-import 'package:catalytic_collector/services/database2.dart';
+
 import 'package:catalytic_collector/screens/template.dart';
 
 class Brand extends StatelessWidget {
-  final AuthService _auth = AuthService();
+  final AuthService1 _auth = AuthService1();
   static int j = 0;
-
-  Future<void> changej() {
-    j = 5;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +19,6 @@ class Brand extends StatelessWidget {
       "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/KiaHyundai-logo-1.png",
       "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/Isuzu-Logo-1.png",
       "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/Alfa-Romeo-Logo-1.png",
-
-
       "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/Nissan-logo-1.png",
       "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/Proton-Logo-1.png",
       "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/chevy-logo-1.png",
@@ -62,8 +53,8 @@ class Brand extends StatelessWidget {
             ),
           ),
           onTap: () {
-            FinalState.itemsearch ="";
-            j = index +1;
+            FinalState.itemsearch = "";
+            j = index + 1;
 
             Navigator.push(
               context,
@@ -73,42 +64,39 @@ class Brand extends StatelessWidget {
         );
       },
     );
-    j = 7;
+
     void _showSettingsPanel() {
       showModalBottomSheet(
           context: context,
           builder: (context) {
             return Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-              child: SettingsForm(),
+              child: SettingsForm1(),
             );
           });
     }
 
-    return StreamProvider<List<Brew>>.value(
-      value: DatabaseService().brews,
-      child: Scaffold(
-          backgroundColor: Colors.brown[50],
-          appBar: AppBar(
-            title: Text('Brand'),
-            backgroundColor: Colors.lightBlue,
-            elevation: 0.0,
-            actions: <Widget>[
-              FlatButton.icon(
-                icon: Icon(Icons.person),
-                label: Text('logout'),
-                onPressed: () async {
-                  await _auth.signOut();
-                },
-              ),
-              FlatButton.icon(
-                icon: Icon(Icons.settings),
-                label: Text('settings'),
-                onPressed: () => _showSettingsPanel(),
-              )
-            ],
-          ),
-          body: myGridView),
-    );
+    return Scaffold(
+        backgroundColor: Colors.brown[50],
+        appBar: AppBar(
+          title: Text('Brand'),
+          backgroundColor: Colors.lightBlue,
+          elevation: 0.0,
+          actions: <Widget>[
+            FlatButton.icon(
+              icon: Icon(Icons.person),
+              label: Text('logout'),
+              onPressed: () async {
+                await _auth.signOut();
+              },
+            ),
+            FlatButton.icon(
+              icon: Icon(Icons.settings),
+              label: Text('settings'),
+              onPressed: () => _showSettingsPanel(),
+            )
+          ],
+        ),
+        body: myGridView);
   }
 }

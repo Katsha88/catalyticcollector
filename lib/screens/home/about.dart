@@ -1,15 +1,16 @@
 import 'package:catalytic_collector/models/brew.dart';
+import 'package:catalytic_collector/models/cata.dart';
 
-import 'package:catalytic_collector/screens/home/brew_list.dart';
-import 'package:catalytic_collector/screens/home/settings_form.dart';
-import 'package:catalytic_collector/services/auth.dart';
-import 'package:catalytic_collector/services/database.dart';
+
+import 'package:catalytic_collector/screens/home/setting_form1.dart';
+import 'package:catalytic_collector/services/auth1.dart';
+import 'package:catalytic_collector/services/database2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class About extends StatelessWidget {
 
-  final AuthService _auth = AuthService();
+  final AuthService1 _auth = AuthService1();
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +19,12 @@ class About extends StatelessWidget {
       showModalBottomSheet(context: context, builder: (context) {
         return Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-          child: SettingsForm(),
+          child: SettingsForm1(),
         );
       });
     }
 
-    return StreamProvider<List<Brew>>.value(
-      value: DatabaseService().brews,
-      child: Scaffold(
+    return  Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(
           title: Text('About Us'),
@@ -58,7 +57,7 @@ class About extends StatelessWidget {
             )
 
         ),
-      ),
-    );
+      )
+    ;
   }
 }
