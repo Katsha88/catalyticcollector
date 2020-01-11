@@ -24,6 +24,8 @@ class RegisterState extends State<Register> {
   String email = '';
   String password = '';
   String phone= '';
+  var sell= [];
+
 
 
   @override
@@ -94,7 +96,7 @@ class RegisterState extends State<Register> {
                 onPressed: () async {
                   if(_formKey.currentState.validate()){
                     setState(() => loading = true);
-                    dynamic result = await _auth.registerWithEmailAndPassword(email, password, name, phone);
+                    dynamic result = await _auth.registerWithEmailAndPassword(email, password, name, phone,sell);
                     if(result == null) {
                       setState(() {
                         loading = false;

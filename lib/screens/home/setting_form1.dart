@@ -17,7 +17,6 @@ class _SettingsForm1State extends State<SettingsForm1> {
 
   // form values
   String _currentName;
-  String _currentEmail;
   String _currentPhone;
 
   @override
@@ -27,7 +26,7 @@ class _SettingsForm1State extends State<SettingsForm1> {
     return StreamBuilder<UserData1>(
         stream: DataUser(uid: user.uid).userData,
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+
             UserData1 userData = snapshot.data;
             return Form(
                 key: _formKey1,
@@ -89,16 +88,17 @@ class _SettingsForm1State extends State<SettingsForm1> {
                               await DataUser(uid: user.uid).updateUserData(
                                   snapshot.data.email,
                                   _currentName ?? snapshot.data.name,
-                                  _currentPhone ?? snapshot.data.phone);
+                                  _currentPhone ?? snapshot.data.phone,
+                                  snapshot.data.sell
+
+                              );
                               Navigator.pop(context);
                             }
                           }),
                     ],
                   ),
                 ));
-          } else {
-            return Loading();
-          }
+
         });
   }
 }

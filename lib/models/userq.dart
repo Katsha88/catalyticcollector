@@ -2,7 +2,8 @@ class Userq {
 
   final String name;
   final String phone;
-  final int email;
+  final String email;
+  final List <String> sell;
 
-  Userq({ this.name, this.phone, this.email });
+  Userq({ this.name, this.phone, this.email ,this.sell});
 }

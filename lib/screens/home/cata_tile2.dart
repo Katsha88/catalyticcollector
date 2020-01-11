@@ -6,6 +6,8 @@ import 'package:catalytic_collector/models/parameter.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/rendering.dart';
+import 'package:catalytic_collector/screens/home/itempage.dart';
+
 
 class CataTile2 extends StatelessWidget {
   final Cata cata;
@@ -22,14 +24,20 @@ class CataTile2 extends StatelessWidget {
 
 
 
-
-
   CataTile2({this.cata, this.para});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
+    child:
+    GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Itempage(photo: cata.images,name: cata.name, brand: cata.categories,description: cata.description,price: "RM "+calculate().toStringAsFixed(1),)),
+          );
+        },
       child: Card(
           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
           borderOnForeground: true,
@@ -72,7 +80,7 @@ class CataTile2 extends StatelessWidget {
                 ),
               )
             ],
-          )),
+          ))),
     );
   }
 }

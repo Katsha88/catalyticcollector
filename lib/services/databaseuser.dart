@@ -10,13 +10,14 @@ class DataUser {
   DataUser({ this.uid });
 
   // collection reference
-  final CollectionReference brewCollection = Firestore.instance.collection('brews');
+  final CollectionReference brewCollection = Firestore.instance.collection('Users');
 
-  Future<void> updateUserData(String email, String name, String phone) async {
+  Future<void> updateUserData(String email, String name, String phone, var sell) async {
     return await brewCollection.document(uid).setData({
       'email': email,
       'name': name,
       'phone': phone,
+      'sell': sell
     });
   }
 
@@ -27,7 +28,8 @@ class DataUser {
       return Userq(
           name: doc.data['name'] ?? '',
           email: doc.data['email'] ?? '',
-          phone: doc.data['phone'] ?? ''
+          phone: doc.data['phone'] ?? '',
+        sell : doc.data['sell'] ?? []
       );
     }).toList();
   }
@@ -36,9 +38,10 @@ class DataUser {
   UserData1 _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData1(
         uid: uid,
-        name: snapshot.data['name'],
-        email: snapshot.data['email'],
-        phone: snapshot.data['phone']
+        name: snapshot.data['name']??"",
+        email: snapshot.data['email']??"",
+        phone: snapshot.data['phone']??"",
+      sell : snapshot.data ['sell']??""
     );
   }
 
