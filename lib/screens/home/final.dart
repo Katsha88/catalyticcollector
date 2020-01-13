@@ -172,10 +172,7 @@ class FinalState extends State<Final> {
                       ),
 
 
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Text("Please Choose Brand"),
+
                       SizedBox(
                         height: 10.0,
                       ),

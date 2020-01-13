@@ -86,7 +86,7 @@ else{
       else{
          DatabaseService2(toshorten: FinalState.todata, searchitem: FinalState.itemsearch).lala;
 
-        return brewCollection.orderBy('Meta: meta_title').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
+        return brewCollection.where("Categories",isEqualTo:toshorten ).orderBy('Meta: meta_title').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
           .map(_cataListFromSnapshot);}
 
 

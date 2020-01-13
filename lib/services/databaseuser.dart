@@ -20,19 +20,15 @@ class DataUser {
       'sell': sell
     });
   }
+  Future<void> updatesellData(var sell) async {
+    return await brewCollection.document(uid).updateData({
+
+      'sell': FieldValue.arrayUnion(sell)
+    });
+  }
+
 
   // brew list from snapshot
-  List<Userq> _brewListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc){
-      //print(doc.data);
-      return Userq(
-          name: doc.data['name'] ?? '',
-          email: doc.data['email'] ?? '',
-          phone: doc.data['phone'] ?? '',
-        sell : doc.data['sell'] ?? []
-      );
-    }).toList();
-  }
 
   // user data from snapshots
   UserData1 _userDataFromSnapshot(DocumentSnapshot snapshot) {
@@ -46,10 +42,7 @@ class DataUser {
   }
 
   // get brews stream
-  Stream<List<Userq>> get brews {
-    return brewCollection.snapshots()
-        .map(_brewListFromSnapshot);
-  }
+
 
   // get user doc stream
   Stream<UserData1> get userData {
