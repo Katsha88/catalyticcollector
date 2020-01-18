@@ -24,12 +24,16 @@ class RegisterState extends State<Register> {
   String email = '';
   String password = '';
   String phone= '';
+  String country='';
   var sell= [];
+
 
 
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    final String countrygps = myLocale.toString();
     return loading ? Loading() : Scaffold(
       backgroundColor: Colors.white30,
       appBar: AppBar(
@@ -87,6 +91,10 @@ class RegisterState extends State<Register> {
                 },
               ),
               SizedBox(height: 20.0),
+              TextFormField(
+                initialValue: countrygps,
+
+              ),
               RaisedButton(
                 color: Colors.pink[400],
                 child: Text(
@@ -96,7 +104,7 @@ class RegisterState extends State<Register> {
                 onPressed: () async {
                   if(_formKey.currentState.validate()){
                     setState(() => loading = true);
-                    dynamic result = await _auth.registerWithEmailAndPassword(email, password, name, phone,sell);
+                    dynamic result = await _auth.registerWithEmailAndPassword(email, password, name, phone,country,sell);
                     if(result == null) {
                       setState(() {
                         loading = false;

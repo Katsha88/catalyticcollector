@@ -1,5 +1,6 @@
 import 'package:catalytic_collector/models/parameter.dart';
 import 'package:catalytic_collector/screens/home/search4.dart';
+import 'package:catalytic_collector/services/databaseuser.dart';
 import 'package:catalytic_collector/services/datapara.dart';
 import 'package:catalytic_collector/shared/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,7 +18,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'brand.dart';
-
+import 'package:catalytic_collector/models/currencyuser.dart';
+import 'package:catalytic_collector/services/data_currency.dart';
+import 'package:catalytic_collector/models/User1.dart';
+import 'package:catalytic_collector/shared/loading.dart';
 
 class Final extends StatefulWidget {
   @override
@@ -79,14 +83,14 @@ class Company {
 
 class FinalState extends State<Final> {
   final AuthService1 _auth = AuthService1();
-  static String itemsearch="";  // variable for searching about Item
+  static String itemsearch = ""; // variable for searching about Item
 
   //
   List<Company> _companies = Company.getCompanies();
   List<DropdownMenuItem<Company>> _dropdownMenuItems;
   Company _selectedCompany;
   static String todata;
-  int i =Brand.j;
+  int i = Brand.j;
 
   @override
   void initState() {
@@ -129,77 +133,92 @@ class FinalState extends State<Final> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<List<Cata>>.value(
-      value: DatabaseService2(toshorten: todata , searchitem: itemsearch).catas,
-      child: StreamProvider <List<Parameter>>.value(
-
-          value: Datapara().paras,
-
-      child: Scaffold(
-          backgroundColor: Colors.brown[50],
-          appBar: AppBar(
-            title: Text('Catalytic Collector'),
-            backgroundColor: Colors.lightBlue,
-            elevation: 0.0,
-            actions: <Widget>[
-              FlatButton.icon(
-                icon: Icon(Icons.person),
-                label: Text('logout'),
-                onPressed: () async {
-                  await _auth.signOut();
-                },
-              ),
-              FlatButton.icon(
-                icon: Icon(Icons.settings),
-                label: Text('settings'),
-                onPressed: () => _showSettingsPanel(),
-              )
-            ],
-          ),
-          body: Column(
-            children: <Widget>[
-              Container(
-                child: Center(
-                  child: ListView(
-                    padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
-                    shrinkWrap: true,
-                    children: <Widget>[
-                      TextFormField(
-                        decoration: textInputDecoration.copyWith(hintText: "Enter your product name"),
-                        onChanged: (val) {
-                          setState(() => itemsearch = val);
-                        },
-                      ),
+    User1 user = Provider.of<User1>(context);
 
 
+    return  StreamBuilder<UserData1>(
+        stream: DataUser(uid: user.uid).userData,
+    builder: (context, snapshot) {
+    if(snapshot.hasData) {
+      UserData1 userData = snapshot.data;
+       String gotcountry = userData.country;
+      return
+        StreamProvider<List<Cata>>.value(
+            value: DatabaseService2(toshorten: todata, searchitem: itemsearch)
+                .catas,
+            child: StreamProvider<List<Parameter>>.value(
+                value: Datapara().paras,
+                child: StreamProvider<List<Currencyuser>>.value(
+                  value: Data_currency(gotcounty: gotcountry).currencies,
+                  child: Scaffold(
+                      backgroundColor: Colors.brown[50],
+                      appBar: AppBar(
+                        title: Text('Catalytic Collector'),
+                        backgroundColor: Colors.lightBlue,
+                        elevation: 0.0,
+                        actions: <Widget>[
+                          FlatButton.icon(
+                            icon: Icon(Icons.person),
+                            label: Text('logout'),
+                            onPressed: () async {
+                              await _auth.signOut();
+                            },
+                          ),
+                          FlatButton.icon(
+                            icon: Icon(Icons.settings),
+                            label: Text('settings'),
+                            onPressed: () => _showSettingsPanel(),
+                          )
+                        ],
+                      ),
+                      body: Column(
+                        children: <Widget>[
+                          Container(
+                            child: Center(
+                              child: ListView(
+                                padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
+                                shrinkWrap: true,
+                                children: <Widget>[
+                                  TextFormField(
+                                    decoration: textInputDecoration.copyWith(
+                                        hintText: "Enter your product name"),
+                                    onChanged: (val) {
+                                      setState(() => itemsearch = val);
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  DropdownButton(
+                                    value: _selectedCompany,
+                                    items: _dropdownMenuItems,
+                                    onChanged: onChangeDropdownItem,
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Flexible(
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage('assets/Stone.jpg'),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                child: CataList()),
+                          )
+                        ],
+                      )),
+                )));
+    }
+    else{
+      return Loading();
+    }
 
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      DropdownButton(
-                        value: _selectedCompany,
-                        items: _dropdownMenuItems,
-                        onChanged: onChangeDropdownItem,
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Flexible(
-                child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/Stone.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: CataList()),
-              )
-            ],
-          )),
-    ));
+        });
   }
 }

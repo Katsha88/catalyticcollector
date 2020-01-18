@@ -12,8 +12,9 @@ class UserData1 {
   final String name;
   final String email;
   final String phone;
+  final String country;
   final  sell;
 
-  UserData1({ this.uid, this.email, this.phone, this.name, this.sell});
+  UserData1({ this.uid, this.email, this.phone, this.name,this.country, this.sell});
 
 }

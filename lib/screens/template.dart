@@ -12,7 +12,6 @@ import 'home/contact.dart';
 import 'home/industrial.dart';
 import 'home/contact2.dart';
 
-
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,13 +22,11 @@ class Template extends StatefulWidget {
     return TemplateState();
   }
 }
+
 class TemplateState extends State<Template> {
   int _selectedTab = 0;
-  final _pageOptions = [
+  final _pageOptions = [Final(), Brand(), About(), Contact2()];
 
-    Final(), Brand(),About(), Contact2()
-
-  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,9 +42,6 @@ class TemplateState extends State<Template> {
           selectedItemColor: Colors.deepOrange,
           unselectedItemColor: Colors.indigo,
           type: BottomNavigationBarType.fixed,
-
-
-
           currentIndex: _selectedTab,
           onTap: (int index) {
             setState(() {
@@ -57,7 +51,8 @@ class TemplateState extends State<Template> {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
-              title: Text('Search',
+              title: Text(
+                'Search',
               ),
             ),
             BottomNavigationBarItem(
@@ -76,4 +71,5 @@ class TemplateState extends State<Template> {
         ),
       ),
     );
-  }}
+  }
+}

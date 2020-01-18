@@ -18,7 +18,7 @@ final String searchitem; // for searching about item
   final String toshorten;
   DatabaseService2({ this.toshorten , this.searchitem});
 
-var paraCollection = Firestore.instance.collection('MetalPrice').document("cJhc2ScQNipVm1d6aUU4");
+
 
 
 
@@ -62,7 +62,7 @@ if ( searchitem == ""){
       .map(_cataListFromSnapshot);
 
 }
-else{
+else  {
 
   return brewCollection.orderBy("Meta: meta_title").startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
     .map(_cataListFromSnapshot);
@@ -83,10 +83,10 @@ else{
             .map(_cataListFromSnapshot);
 
       }
-      else{
-         DatabaseService2(toshorten: FinalState.todata, searchitem: FinalState.itemsearch).lala;
+      else  {
 
-        return brewCollection.where("Categories",isEqualTo:toshorten ).orderBy('Meta: meta_title').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
+
+        return brewCollection.where("Categories",isEqualTo:toshorten ).startAt([searchitem]).endAt([searchitem+'\uf8ff']).orderBy('Meta: meta_title').snapshots()
           .map(_cataListFromSnapshot);}
 
 
@@ -95,11 +95,13 @@ else{
 
 
   }
-  Stream<List<Cata>> get lala{
-    return brewCollection.orderBy('Meta: meta_title').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
+   Stream<List<Cata>>   get  lala {
+    return  brewCollection.orderBy('Meta: meta_title').startAt([searchitem]).endAt([searchitem+'\uf8ff']).snapshots()
         .map(_cataListFromSnapshot);
   }
   // get user doc stream
+
+
 
 
 }

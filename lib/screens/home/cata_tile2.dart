@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:catalytic_collector/models/brew.dart';
 import 'package:catalytic_collector/models/cata.dart';
+import 'package:catalytic_collector/models/currencyuser.dart';
 import 'package:catalytic_collector/models/parameter.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +13,13 @@ import 'package:catalytic_collector/screens/home/itempage.dart';
 class CataTile2 extends StatelessWidget {
   final Cata cata;
   final Parameter para;
+  final Currencyuser currency;
 
 
   double calculate(){
-    double price2 = (double.parse(cata.pd) * para.pd1 + double.parse(cata.pt) * para.pt1 +double.parse(cata.rh) * para.rh1)* 4.1326 * 0.8* double.parse(cata.weight) -(double.parse(cata.weight)*10*4.1326)
+    double price2 = (double.parse(cata.pd) * para.pd1 + double.parse(cata.pt) * para.pt1 +double.parse(cata.rh)
+        * para.rh1)* currency.exrate * currency.profiterate* double.parse(cata.weight) -(double.parse(cata.weight)*10*
+        currency.exrate)
     ;
      double pricefinal = max(0, price2);
      return pricefinal;
@@ -24,7 +28,7 @@ class CataTile2 extends StatelessWidget {
 
 
 
-  CataTile2({this.cata, this.para});
+  CataTile2({this.cata, this.para ,this.currency});
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +79,7 @@ class CataTile2 extends StatelessWidget {
               Container(
                 padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 5),
                 child: Text(
-               "RM "+calculate().toStringAsFixed(1) ,
+               currency.symbol+" "+calculate().toStringAsFixed(1) ,
                   style: TextStyle(color: Colors.grey.shade600),
                 ),
               )

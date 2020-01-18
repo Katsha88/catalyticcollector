@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'cata_tile2.dart';
 import 'package:catalytic_collector/models/parameter.dart';
-import 'package:catalytic_collector/models/parameter.dart';
+import 'package:catalytic_collector/models/currencyuser.dart';
 
 
 
@@ -20,11 +20,12 @@ class _CataListState extends State<CataList> {
 
     final catas = Provider.of<List<Cata>>(context) ?? [];
     final paras = Provider.of<List<Parameter>>(context) ?? [];
+    final currencies = Provider.of<List<Currencyuser>>(context) ?? [];
 
     return ListView.builder(
       itemCount: catas.length,
       itemBuilder: (context, index) {
-        return CataTile2(cata: catas[index], para: paras[0],);
+        return CataTile2(cata: catas[index], para: paras[0], currency: currencies[0] ,);
       },
     );
   }
