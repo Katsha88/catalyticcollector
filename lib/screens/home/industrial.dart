@@ -11,6 +11,7 @@ class Industrial extends StatelessWidget {
 
   final AuthService _auth = AuthService();
 
+
   @override
   Widget build(BuildContext context) {
 

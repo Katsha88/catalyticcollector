@@ -8,10 +8,14 @@ import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:catalytic_collector/services/data_currency.dart';
 import 'package:catalytic_collector/models/currencyuser.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:flutter/services.dart';
+
 
 class SettingsForm1 extends StatefulWidget {
   @override
   SettingsForm1State createState() => SettingsForm1State();
+
 }
 
 class  SettingsForm1State extends State<SettingsForm1> {
@@ -24,8 +28,11 @@ class  SettingsForm1State extends State<SettingsForm1> {
   bool check =true;
 
 
+
+
   @override
   Widget build(BuildContext context) {
+
 
 
     User1 user = Provider.of<User1>(context);
@@ -143,6 +150,10 @@ class  SettingsForm1State extends State<SettingsForm1> {
 
                             ),
                           )),
+
+
+
+
                       RaisedButton(
                           color: Colors.pink[400],
                           child: Text(

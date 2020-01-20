@@ -22,6 +22,7 @@ import 'package:catalytic_collector/models/currencyuser.dart';
 import 'package:catalytic_collector/services/data_currency.dart';
 import 'package:catalytic_collector/models/User1.dart';
 import 'package:catalytic_collector/shared/loading.dart';
+import 'package:catalytic_collector/shared/threedots.dart';
 
 class Final extends StatefulWidget {
   @override
@@ -31,6 +32,8 @@ class Final extends StatefulWidget {
 class Company {
   int id;
   String name;
+
+
 
   Company(this.id, this.name);
 
@@ -83,7 +86,21 @@ class Company {
 
 class FinalState extends State<Final> {
   final AuthService1 _auth = AuthService1();
-  static String itemsearch = ""; // variable for searching about Item
+  static String itemsearch = "";
+
+  // variable for searching about Item
+  void choiceAction(String choice){
+    if(choice == Threedots.Settings){
+      _showSettingsPanel();
+    }else if(choice == Threedots.My_favorite){
+      print('Subscribe');
+    }else if(choice == Threedots.Product_for_sell){
+      print('SignOut');
+    }
+    else if(choice == Threedots.SignOut) {
+       _auth.signOut();
+    }
+  }
 
   //
   List<Company> _companies = Company.getCompanies();
@@ -135,90 +152,98 @@ class FinalState extends State<Final> {
   Widget build(BuildContext context) {
     User1 user = Provider.of<User1>(context);
 
-
-    return  StreamBuilder<UserData1>(
+    return StreamBuilder<UserData1>(
         stream: DataUser(uid: user.uid).userData,
-    builder: (context, snapshot) {
-    if(snapshot.hasData) {
-      UserData1 userData = snapshot.data;
-       String gotcountry = userData.country;
-      return
-        StreamProvider<List<Cata>>.value(
-            value: DatabaseService2(toshorten: todata, searchitem: itemsearch)
-                .catas,
-            child: StreamProvider<List<Parameter>>.value(
-                value: Datapara().paras,
-                child: StreamProvider<List<Currencyuser>>.value(
-                  value: Data_currency(gotcounty: gotcountry).currencies,
-                  child: Scaffold(
-                      backgroundColor: Colors.brown[50],
-                      appBar: AppBar(
-                        title: Text('Catalytic Collector'),
-                        backgroundColor: Colors.lightBlue,
-                        elevation: 0.0,
-                        actions: <Widget>[
-                          FlatButton.icon(
-                            icon: Icon(Icons.person),
-                            label: Text('logout'),
-                            onPressed: () async {
-                              await _auth.signOut();
-                            },
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            UserData1 userData = snapshot.data;
+            String gotcountry = userData.country;
+            return StreamProvider<List<Cata>>.value(
+                value:
+                    DatabaseService2(toshorten: todata, searchitem: itemsearch)
+                        .catas,
+                child: StreamProvider<List<Parameter>>.value(
+                    value: Datapara().paras,
+                    child: StreamProvider<List<Currencyuser>>.value(
+                      value: Data_currency(gotcounty: gotcountry).currencies,
+                      child: Scaffold(
+                          backgroundColor: Colors.brown[50],
+                          appBar: AppBar(
+                            title: Text('Catalytic Collector'),
+                            backgroundColor: Colors.lightBlue,
+                            elevation: 0.0,
+                            actions: <Widget>[
+                              PopupMenuButton<String>(
+                                onSelected: choiceAction,
+                                itemBuilder: (BuildContext context){
+                                  return Threedots.choices.map((String choice){
+                                    return PopupMenuItem<String>(
+                                      value: choice,
+                                      child: Text(choice),
+                                    );
+                                  }).toList();
+                                },
+                              )
+
+                            ],
                           ),
-                          FlatButton.icon(
-                            icon: Icon(Icons.settings),
-                            label: Text('settings'),
-                            onPressed: () => _showSettingsPanel(),
-                          )
-                        ],
-                      ),
-                      body: Column(
-                        children: <Widget>[
-                          Container(
-                            child: Center(
-                              child: ListView(
-                                padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
-                                shrinkWrap: true,
-                                children: <Widget>[
-                                  TextFormField(
-                                    decoration: textInputDecoration.copyWith(
-                                        hintText: "Enter your product name"),
-                                    onChanged: (val) {
-                                      setState(() => itemsearch = val);
-                                    },
-                                  ),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  DropdownButton(
-                                    value: _selectedCompany,
-                                    items: _dropdownMenuItems,
-                                    onChanged: onChangeDropdownItem,
-                                  ),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/Stone.jpg'),
-                                    fit: BoxFit.cover,
+                          body: Column(
+                            children: <Widget>[
+                              Container(
+                                child: Center(
+                                  child: ListView(
+                                    padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
+                                    shrinkWrap: true,
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: TextFormField(
+                                              decoration:
+                                                  textInputDecoration.copyWith(
+                                                      hintText:
+                                                          "Enter your product name"),
+                                              onChanged: (val) {
+                                                setState(
+                                                    () => itemsearch = val);
+                                              },
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Expanded(
+                                            child: DropdownButton(
+                                              value: _selectedCompany,
+                                              items: _dropdownMenuItems,
+                                              onChanged: onChangeDropdownItem,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 3.0,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                child: CataList()),
-                          )
-                        ],
-                      )),
-                )));
-    }
-    else{
-      return Loading();
-    }
-
+                              ),
+                              Flexible(
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage('assets/Stone.jpg'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    child: CataList()),
+                              )
+                            ],
+                          )),
+                    )));
+          } else {
+            return Loading();
+          }
         });
   }
 }

@@ -7,14 +7,17 @@ import 'package:catalytic_collector/services/auth1.dart';
 import 'package:catalytic_collector/services/database2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:catalytic_collector/shared/threedots.dart';
 
 class About extends StatelessWidget {
 
   final AuthService1 _auth = AuthService1();
 
+
+
+
   @override
   Widget build(BuildContext context) {
-
     void _showSettingsPanel() {
       showModalBottomSheet(context: context, builder: (context) {
         return Container(
@@ -24,6 +27,22 @@ class About extends StatelessWidget {
       });
     }
 
+
+    void choiceAction(String choice){
+      if(choice == Threedots.Settings){
+        _showSettingsPanel();
+      }else if(choice == Threedots.My_favorite){
+        print('Subscribe');
+      }else if(choice == Threedots.Product_for_sell){
+        print('SignOut');
+      }
+      else if(choice == Threedots.SignOut) {
+        _auth.signOut();
+      }
+    }
+
+
+
     return  Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(
@@ -31,17 +50,16 @@ class About extends StatelessWidget {
           backgroundColor: Colors.lightBlue,
           elevation: 0.0,
           actions: <Widget>[
-            FlatButton.icon(
-              icon: Icon(Icons.person),
-              label: Text('logout'),
-              onPressed: () async {
-                await _auth.signOut();
+            PopupMenuButton<String>(
+              onSelected: choiceAction,
+              itemBuilder: (BuildContext context){
+                return Threedots.choices.map((String choice){
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
               },
-            ),
-            FlatButton.icon(
-              icon: Icon(Icons.settings),
-              label: Text('settings'),
-              onPressed: () => _showSettingsPanel(),
             )
           ],
         ),
