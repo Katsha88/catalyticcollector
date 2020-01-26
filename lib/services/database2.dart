@@ -29,18 +29,25 @@ final String searchitem; // for searching about item
   List<Cata> _cataListFromSnapshot(QuerySnapshot snapshot) {
 
     return snapshot.documents.map((doc){
-      String g = doc.data["Images1"];
-      g =g.replaceAll("https://", "https://i0.wp.com/");
+
+      List a = doc.data["ImagesList"];
+      List g = [];
+      for( var i = 0 ; i < a.length;i++) {
+
+        g.add(a[i].replaceAll("https://", "https://i0.wp.com/"));
+      }
+
+
       //print(doc.data);
       return Cata(
           name: doc.data['Meta: meta_title'] ?? "0",
           categories: (doc.data['Categories']) ?? '0',
           description: doc.data["Short description"] ?? '0',
-        images: g ?? "https://image.shutterstock.com/image-vector/no-photography-video-260nw-1161043789.jpg",
-        pd: doc.data['Meta: pd'] ?? "0",
-          pt: doc.data['Meta: pt'] ?? "0",
-          rh :doc.data['Meta: rh'] ?? "0",
-        weight: doc.data['Weight (kg)'] ?? "0",
+        images: g?? [""],
+        pd: doc.data['Meta: pd'] ?? 0,
+          pt: doc.data['Meta: pt'] ?? 0,
+          rh :doc.data['Meta: rh'] ?? 0,
+        weight: doc.data['Weight (kg)'] ?? 0,
 
 
 

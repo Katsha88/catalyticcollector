@@ -1,6 +1,6 @@
 import 'package:catalytic_collector/models/cata.dart';
 import 'package:catalytic_collector/screens/home/brew_tile.dart';
-import 'package:catalytic_collector/screens/home/cata_tile.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'cata_tile2.dart';

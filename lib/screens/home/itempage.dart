@@ -12,9 +12,10 @@ import 'package:provider/provider.dart';
 import 'package:catalytic_collector/services/databaseuser.dart';
 import 'package:catalytic_collector/models/User1.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Itempage extends StatelessWidget {
-  String photo;
+  List photo;
   String name;
   String brand;
   String description;
@@ -26,6 +27,9 @@ class Itempage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     void _showSettingsPanel() {
       showModalBottomSheet(
           context: context,
@@ -43,20 +47,7 @@ class Itempage extends StatelessWidget {
         title: Text('Sell'),
         backgroundColor: Colors.lightBlue,
         elevation: 0.0,
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('logout'),
-            onPressed: () async {
-              await _auth.signOut();
-            },
-          ),
-          FlatButton.icon(
-            icon: Icon(Icons.settings),
-            label: Text('settings'),
-            onPressed: () => _showSettingsPanel(),
-          )
-        ],
+
       ),
       body: Card(
           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
@@ -66,7 +57,7 @@ class Itempage extends StatelessWidget {
             Container(
               padding: EdgeInsets.fromLTRB(20.0, 20, 20.0, 5),
               child: Image.network(
-                photo,
+                photo [0],
               ),
             ),
             Container(
@@ -113,7 +104,14 @@ class Itempage extends StatelessWidget {
                         // set up the button
                         Widget okButton = FlatButton(
                           child: Text("OK"),
-                          onPressed: () { },
+                          onPressed: () {
+                            Navigator.of(context).pop();
+
+
+
+                          },
+
+
                         );
 
                         // set up the AlertDialog
@@ -122,6 +120,7 @@ class Itempage extends StatelessWidget {
                           content: Text("Your item:$name is added for selling"),
                           actions: [
                             okButton,
+
                           ],
                         );
 
@@ -133,8 +132,10 @@ class Itempage extends StatelessWidget {
                           },
                         );
                       }
-                       DataUser(uid: user.uid).updatesellData([name]);
+                   await    DataUser(uid: user.uid).updatesellData([name]);
                       showAlertDialog(context);
+
+
 
 
 

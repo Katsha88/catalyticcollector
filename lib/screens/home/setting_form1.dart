@@ -25,6 +25,7 @@ class  SettingsForm1State extends State<SettingsForm1> {
   String _currentName;
   String _currentPhone;
   String currentCountry;
+  String sell;
   bool check =true;
 
 
@@ -150,6 +151,8 @@ class  SettingsForm1State extends State<SettingsForm1> {
 
                             ),
                           )),
+
+
 
 
 

@@ -3,11 +3,11 @@ class Cata {
   final String name;
   final String categories;
   final String description;
-  final String images;
-  final String pd;
-  final String  pt;
-  final String rh;
-  final String weight;
+  final List  images;
+  final num pd;
+  final num  pt;
+  final num rh;
+  final num weight;
 
 
 
