@@ -26,6 +26,7 @@ class RegisterState extends State<Register> {
   String phone = '';
   String country = '';
   var sell = [];
+  var favorites = [];
   Future <String> helplocation;
 
   TextEditingController _textEditingController;
@@ -150,7 +151,8 @@ class RegisterState extends State<Register> {
                           name,
                           phone,
                           country,
-                          sell);
+                          sell,
+                      favorites);
                       if (result == null) {
                         setState(() {
                           loading = false;

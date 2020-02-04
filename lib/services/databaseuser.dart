@@ -13,19 +13,33 @@ class DataUser {
   // collection reference
   final CollectionReference brewCollection = Firestore.instance.collection('Users');
 
-  Future<void> updateUserData(String email, String name, String phone, String country, var sell) async {
+  Future<void> updateUserData(String email, String name, String phone, String country, var sell, var favorites) async {
     return await brewCollection.document(uid).setData({
       'email': email,
       'name': name,
       'phone': phone,
       'country': country,
-      'sell': sell
+      'sell': sell,
+      'favorites': favorites
+
     });
   }
   Future<void> updatesellData(var sell) async {
     return await brewCollection.document(uid).updateData({
 
       'sell': FieldValue.arrayUnion(sell)
+    });
+  }
+  Future<void> updatefavoritesData(var favorites) async {
+    return await brewCollection.document(uid).updateData({
+
+      'favorites': FieldValue.arrayUnion(favorites)
+    });
+  }
+  Future<void> removefavoritesData(var favorites) async {
+    return await brewCollection.document(uid).updateData({
+
+      'favorites': FieldValue.arrayRemove(favorites)
     });
   }
 
@@ -41,7 +55,8 @@ class DataUser {
         email: snapshot.data['email']??"",
         phone: snapshot.data['phone']??"",
       country : snapshot.data['country']??"",
-      sell : snapshot.data ['sell']??""
+      sell : snapshot.data ['sell']??[],
+      favorites:  snapshot.data ['favorites']?? []
     );
   }
 
@@ -54,9 +69,5 @@ class DataUser {
         .map(_userDataFromSnapshot);
   }
 
-  Stream<UserData1> get getcountry {
-    return brewCollection.document(uid).snapshots()
-        .map(_userDataFromSnapshot);
-  }
 
 }

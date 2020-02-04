@@ -14,7 +14,8 @@ class UserData1 {
   final String phone;
   final String country;
   final  sell;
+  final  favorites;
 
-  UserData1({ this.uid, this.email, this.phone, this.name,this.country, this.sell});
+  UserData1({ this.uid, this.email, this.phone, this.name,this.country, this.sell, this.favorites});
 
 }

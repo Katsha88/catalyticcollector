@@ -4,14 +4,12 @@ class Cata {
   final String categories;
   final String description;
   final List  images;
-  final num pd;
-  final num  pt;
-  final num rh;
-  final num weight;
+  final List parameter;
 
 
 
 
-  Cata({ this.name, this.categories, this.description , this.images, this.pd, this.pt, this.rh ,this.weight});
+
+  Cata({ this.name, this.categories, this.description , this.images,this.parameter});
 
 }

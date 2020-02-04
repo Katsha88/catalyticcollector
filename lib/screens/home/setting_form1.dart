@@ -170,7 +170,11 @@ class  SettingsForm1State extends State<SettingsForm1> {
                                   _currentName ?? snapshot.data.name,
                                   _currentPhone ?? snapshot.data.phone,
                                   currentCountry ?? snapshot.data.phone,
-                                  snapshot.data.sell);
+                                  snapshot.data.sell,
+                                snapshot.data.favorites
+
+
+                              );
                               Navigator.pop(context);
                             }
                           }),

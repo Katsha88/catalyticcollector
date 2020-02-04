@@ -11,26 +11,41 @@ import 'package:catalytic_collector/screens/home/itempage.dart';
 import 'package:catalytic_collector/screens/home/itempage3.dart';
 import 'package:catalytic_collector/services/databaseuser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-class CataTile2 extends StatefulWidget {
-  final Cata cata;
+class CataTile3 extends StatefulWidget {
+  final DocumentSnapshot cata;
   final Parameter para;
   final Currencyuser currency;
   final List favorites;
 
 
 
+  List tofastphoto(){
+  List a = cata["ImagesList"];
+  if (a==[]){
+    print("no photo");
+    a = ["https://catalyticcollector.com/wp-content/uploads/2019/09/Default-1.jpg"];
+  }
+  List g = [];
+  for (var i = 0; i < a.length; i++) {
+  g.add(a[i].replaceAll("https://", "https://i0.wp.com/"));
+  }
+  return g;
+
+  }
+
 
 
   double calculate() {
 
     double total = 0;
-    for(int j =0 ; j< cata.parameter.length; j++){
-      double price2 = (cata.parameter[j]['pd'] * para.pd1 + cata.parameter[j]['pt']
-          * para.pt1 + cata.parameter[j]['rh']
-          * para.rh1) * currency.exrate * currency.profiterate * cata.parameter[j]['weight'] -
-          (cata.parameter[j]['weight']* 10 *
+    for(int j =0 ; j< cata["parameter"].length; j++){
+      double price2 = (cata["parameter"][j]['pd'] * para.pd1 + cata["parameter"][j]['pt']
+          * para.pt1 + cata["parameter"][j]['rh']
+          * para.rh1) * currency.exrate * currency.profiterate * cata["parameter"][j]['weight'] -
+          (cata["parameter"][j]['weight']* 10 *
               currency.exrate)
       ;
       double pricefinal = max(0, price2);
@@ -43,28 +58,28 @@ class CataTile2 extends StatefulWidget {
   }
 
 
-  CataTile2({Key key , this.cata, this.para, this.currency, this.favorites }) :super(key:key) ;
+  CataTile3({Key key , this.cata, this.para, this.currency, this.favorites }) :super(key:key) ;
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return CataTile2State();
+    return CataTile3State();
   }
 }
-class CataTile2State extends State <CataTile2> {
+class CataTile3State extends State <CataTile3> {
   ScrollController controller = ScrollController();
   bool alreadyclick ;
   bool stop
 
-;
+  ;
 
   @override
   initState() {
     super.initState();
 
 
- stop =false;
- alreadyclick =false;
+    stop =false;
+    alreadyclick =false;
 
 
   }
@@ -73,15 +88,15 @@ class CataTile2State extends State <CataTile2> {
 
 
     if (stop == false){
-    for(int i =0 ; i< widget.favorites.length; i++){
-      if(widget.cata.name ==  widget.favorites[i]["name"]){
+      for(int i =0 ; i< widget.favorites.length; i++){
+        if(widget.cata["Meta: meta_title"] ==  widget.favorites[i]["name"]){
 
-        setState((){
-          alreadyclick= true;
-        stop =true;
-        });
+          setState((){
+            alreadyclick= true;
+            stop =true;
+          });
 
-      }}}
+        }}}
 
 
     return Padding(
@@ -92,13 +107,15 @@ class CataTile2State extends State <CataTile2> {
             Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) =>
-                    Itempage3(photo: widget.cata.images,
-                      name: widget.cata.name,
-                      brand: widget.cata.categories,
-                      description: widget.cata.description,
+                    Itempage3(photo: widget.tofastphoto(),
+                      name: widget.cata["Meta: meta_title"],
+                      brand: widget.cata["Categories"],
+                      description: widget.cata["Short description"],
                       price:widget. calculate().toStringAsFixed(1),
                       symbol: widget.currency.symbol,)
                 ));
+
+
           },
           child: Card(
 
@@ -111,13 +128,13 @@ class CataTile2State extends State <CataTile2> {
                   Container(
                     padding: EdgeInsets.fromLTRB(20.0, 20, 20.0, 5),
                     child: Image.network(
-                      widget.cata.images[0],
+                      widget.tofastphoto()[0],
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 5),
                     child: Text(
-                      widget.cata.name,
+                      widget.cata["Meta: meta_title"],
                       style: TextStyle(
                           fontSize: 22, fontWeight: FontWeight.bold),
                     ),
@@ -125,22 +142,23 @@ class CataTile2State extends State <CataTile2> {
                   Container(
                     padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 5),
                     child: Text(
-                     widget. cata.categories,
+                      widget. cata["Categories"],
                       style: TextStyle(color: Colors.grey.shade600),
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 5),
                     child: Text(
-                     widget. cata.description,
+                      widget. cata["Short description"],
                       style: TextStyle(color: Colors.grey.shade600),
                     ),
                   ),
+
                   Row(children: <Widget>[
                     Container(
                       padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 5),
                       child: Text(
-                       widget. currency.symbol + " " + widget.calculate().toStringAsFixed(1),
+                        widget. currency.symbol + " " + widget.calculate().toStringAsFixed(1),
                         style: TextStyle(color: Colors.grey.shade600),
                       ),
                     ),
@@ -150,7 +168,7 @@ class CataTile2State extends State <CataTile2> {
 
                           alreadyclick ? Icons.favorite : Icons.favorite_border,
                           color: alreadyclick ? Colors.red : null,
-                          ),
+                        ),
 
                         onPressed: () async {
                           final FirebaseAuth auth = FirebaseAuth.instance;
@@ -162,7 +180,7 @@ class CataTile2State extends State <CataTile2> {
                             });
 
                             await DataUser(uid: user.uid)
-                                .updatefavoritesData([{"name":widget.cata.name , "photo":widget.cata.images[0],}]);
+                                .updatefavoritesData([{"name":widget.cata["Meta: meta_title"], "photo":widget.cata["ImagesList"][0],}]);
                           }
                           else {
                             setState(() {
@@ -170,8 +188,9 @@ class CataTile2State extends State <CataTile2> {
 
                             });
                             await DataUser(uid: user.uid)
-                                .removefavoritesData([{"name":widget.cata.name , "photo":widget.cata.images[0],}]);
+                                .removefavoritesData([{"name":widget.cata["Meta: meta_title"] , "photo":widget.cata["ImagesList"][0],}]);
                           }
+
 
 
 

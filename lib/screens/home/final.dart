@@ -23,6 +23,10 @@ import 'package:catalytic_collector/services/data_currency.dart';
 import 'package:catalytic_collector/models/User1.dart';
 import 'package:catalytic_collector/shared/loading.dart';
 import 'package:catalytic_collector/shared/threedots.dart';
+import 'package:catalytic_collector/screens/home/itemtoshow.dart';
+import 'package:catalytic_collector/screens/home/favorites.dart';
+import 'package:catalytic_collector/screens/home/cata_list.dart';
+import 'package:catalytic_collector/screens/home/bloc.dart';
 
 class Final extends StatefulWidget {
   @override
@@ -87,14 +91,21 @@ class FinalState extends State<Final> {
   final AuthService1 _auth = AuthService1();
   static String itemsearch = "";
 
+
   // variable for searching about Item
   void choiceAction(String choice){
     if(choice == Threedots.Settings){
       _showSettingsPanel();
     }else if(choice == Threedots.My_favorite){
-      print('Subscribe');
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Favorites()
+          ));
     }else if(choice == Threedots.Product_for_sell){
-      print('SignOut');
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Itemtoshow()
+          ));
     }
     else if(choice == Threedots.SignOut) {
        _auth.signOut();
@@ -107,12 +118,17 @@ class FinalState extends State<Final> {
   Company _selectedCompany;
   static String todata;
   int i = Brand.j;
+  int total1;
+
 
   @override
   void initState() {
     _dropdownMenuItems = buildDropdownMenuItems(_companies);
     _selectedCompany = _dropdownMenuItems[i].value;
     todata = _selectedCompany.name;
+    total1 =0;
+
+
     super.initState();
   }
 
@@ -122,7 +138,10 @@ class FinalState extends State<Final> {
       items.add(
         DropdownMenuItem(
           value: company,
-          child: Text(company.name),
+
+          child: Text(company.name,
+
+          ),
         ),
       );
     }
@@ -142,13 +161,21 @@ class FinalState extends State<Final> {
 
   onChangeDropdownItem(Company selectedCompany) {
     setState(() {
+
       todata = selectedCompany.name;
       _selectedCompany = selectedCompany;
-    });
+      movieListBloc.fetchOnEntry(itemsearch, todata);
+    }
+
+
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    print("number of call");
+    total1 = total1 +5;
+    print("d");
     User1 user = Provider.of<User1>(context);
 
     return StreamBuilder<UserData1>(
@@ -157,11 +184,12 @@ class FinalState extends State<Final> {
           if (snapshot.hasData) {
             UserData1 userData = snapshot.data;
             String gotcountry = userData.country;
-            return StreamProvider<List<Cata>>.value(
-                value:
-                    DatabaseService2(toshorten: todata, searchitem: itemsearch)
-                        .catas,
-                child: StreamProvider<List<Parameter>>.value(
+            List gotfavoirtes = userData.favorites;
+            print("call in fainal");
+
+
+
+            return  StreamProvider<List<Parameter>>.value(
                     value: Datapara().paras,
                     child: StreamProvider<List<Currencyuser>>.value(
                       value: Data_currency(gotcounty: gotcountry).currencies,
@@ -202,10 +230,8 @@ class FinalState extends State<Final> {
                                                   textInputDecoration.copyWith(
                                                       hintText:
                                                           "Enter your product name"),
-                                              onChanged: (val) {
-                                                setState(
-                                                    () => itemsearch = val);
-                                              },
+                                              controller: controllertext,
+
                                             ),
                                           ),
                                           SizedBox(
@@ -215,6 +241,7 @@ class FinalState extends State<Final> {
                                             child: DropdownButton(
                                               value: _selectedCompany,
                                               items: _dropdownMenuItems,
+
                                               onChanged: onChangeDropdownItem,
                                             ),
                                           )
@@ -235,11 +262,11 @@ class FinalState extends State<Final> {
                                         fit: BoxFit.cover,
                                       ),
                                     ),
-                                    child: CataList()),
+                                    child: CataList(favorites: gotfavoirtes,todata: todata,itemsearch: itemsearch)),
                               )
                             ],
                           )),
-                    )));
+                    ));
           } else {
             return Loading();
           }
