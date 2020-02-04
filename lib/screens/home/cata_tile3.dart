@@ -127,8 +127,9 @@ class CataTile3State extends State <CataTile3> {
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.fromLTRB(20.0, 20, 20.0, 5),
-                    child: Image.network(
-                      widget.tofastphoto()[0],
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/source.gif',
+                      image:  widget.tofastphoto()[0],
                     ),
                   ),
                   Container(

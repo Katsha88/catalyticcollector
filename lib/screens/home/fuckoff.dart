@@ -70,7 +70,7 @@ class _FuckoffState extends State<Fuckoff> {
     if (controller.offset >= controller.position.maxScrollExtent &&
         !controller.position.outOfRange) {
       print("at the end of list");
-      movieListBloc.fetchNextMovies();
+
 
 
     }

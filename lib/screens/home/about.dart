@@ -8,6 +8,8 @@ import 'package:catalytic_collector/services/database2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:catalytic_collector/shared/threedots.dart';
+import 'favorites.dart';
+import 'itemtoshow.dart';
 
 class About extends StatelessWidget {
 
@@ -27,14 +29,19 @@ class About extends StatelessWidget {
       });
     }
 
-
     void choiceAction(String choice){
       if(choice == Threedots.Settings){
         _showSettingsPanel();
       }else if(choice == Threedots.My_favorite){
-        print('Subscribe');
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Favorites()
+            ));
       }else if(choice == Threedots.Product_for_sell){
-        print('SignOut');
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Itemtoshow()
+            ));
       }
       else if(choice == Threedots.SignOut) {
         _auth.signOut();

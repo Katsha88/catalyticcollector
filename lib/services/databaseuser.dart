@@ -42,6 +42,12 @@ class DataUser {
       'favorites': FieldValue.arrayRemove(favorites)
     });
   }
+  Future<void> removesellData(var sell) async {
+    return await brewCollection.document(uid).updateData({
+
+      'sell': FieldValue.arrayRemove(sell)
+    });
+  }
 
 
   // brew list from snapshot

@@ -55,12 +55,28 @@ class  FavoritesState extends State<Favorites> {
                         child: Card(
                           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
                           child: ListTile(
-                            leading: CircleAvatar(
-                                radius: 25.0,
 
-                                backgroundImage: NetworkImage(baba[index]["photo"])
+                            leading:
+
+
+
+                            CircleAvatar(
+
+                                radius: 25.0,
+                                child: FadeInImage.assetNetwork(
+                                  placeholder: 'assets/source.gif',
+                                  image:  baba[index]["photo"],
+                                ),
+
+
                             ),
                             title: Text(baba[index]["name"]),
+                            trailing:IconButton(icon: Icon(Icons.delete), onPressed: () async {
+
+                              await DataUser(uid: user.uid)
+                                  .removefavoritesData([{"name":baba[index]["name"] , "photo":baba[index]["photo"],}]);
+                            })
+
 
                           ),
                         ),

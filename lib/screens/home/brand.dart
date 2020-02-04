@@ -1,6 +1,8 @@
 import 'package:catalytic_collector/screens/home/setting_form1.dart';
 import 'package:catalytic_collector/services/auth1.dart';
 import 'package:catalytic_collector/shared/threedots.dart';
+import 'itemtoshow.dart';
+import 'favorites.dart';
 
 import 'package:flutter/material.dart';
 
@@ -66,7 +68,9 @@ class Brand extends StatelessWidget {
             child: new Container(
               alignment: Alignment.centerLeft,
               margin: new EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
-              child: new Image.network(spacecrafts[index]),
+              child: new FadeInImage.assetNetwork(
+                  placeholder: 'assets/source.gif',
+                  image :spacecrafts[index])
             ),
           ),
           onTap: () {
@@ -96,9 +100,15 @@ class Brand extends StatelessWidget {
       if(choice == Threedots.Settings){
         _showSettingsPanel();
       }else if(choice == Threedots.My_favorite){
-        print('Subscribe');
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Favorites()
+            ));
       }else if(choice == Threedots.Product_for_sell){
-        print('SignOut');
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Itemtoshow()
+            ));
       }
       else if(choice == Threedots.SignOut) {
         _auth.signOut();

@@ -78,11 +78,11 @@ class MovieListBloc {
   }
 
 /*This will automatically fetch the next 10 elements from the list*/
-  fetchNextMovies() async {
+  fetchNextMovies(String l ,String k) async {
     try {
       updateIndicator(true);
       List<DocumentSnapshot> newDocumentList =
-          await firebaseProvider.fetchNextList(documentList);
+          await firebaseProvider.fetchNextList(documentList,l, k);
       documentList.addAll(newDocumentList);
       movieController.sink.add(documentList);
       try {

@@ -24,16 +24,32 @@ class FirebaseProvider {
   }
 
   Future<List<DocumentSnapshot>> fetchNextList(
-      List<DocumentSnapshot> documentList) async {
+      List<DocumentSnapshot> documentList, String l , String k) async {
+    if (k == "All") {
         return (await Firestore.instance
             .collection("Items")
+
+            .endAt([l+ '\uf8ff'])
             .startAfterDocument(documentList[documentList.length - 1])
             .limit(10)
             .orderBy("Meta: meta_title")
             .getDocuments())
-            .documents;
+            .documents;}
+    else{
+      return (await Firestore.instance
+          .collection("Items")
+          .where("Categories", isEqualTo: k)
 
-  }
+          .endAt([l+ '\uf8ff'])
+          .startAfterDocument(documentList[documentList.length - 1])
+          .limit(10)
+          .orderBy("Meta: meta_title")
+          .getDocuments())
+          .documents;}
+
+    }
+
+
 
   Future<List<DocumentSnapshot>> fetchEntryList(String l, String k) async {
     print(l);
@@ -44,7 +60,7 @@ if (k == "All") {
       .orderBy("Meta: meta_title")
       .startAt([l])
       .endAt([l + '\uf8ff'])
-      .limit(20)
+      .limit(10)
       .getDocuments())
       .documents;
 }

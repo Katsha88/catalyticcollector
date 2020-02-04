@@ -99,7 +99,7 @@ class _CataListState extends State<CataList> {
     if (controller.offset >= controller.position.maxScrollExtent &&
         !controller.position.outOfRange) {
       print("at the end of list");
-      movieListBloc.fetchNextMovies();
+      movieListBloc.fetchNextMovies(controllertext.text , widget.todata);
     }
   }
 }

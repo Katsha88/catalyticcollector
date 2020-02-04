@@ -45,7 +45,9 @@ class Itempage3State extends State<Itempage3> {
                           width: MediaQuery.of(context).size.width,
                           margin: new EdgeInsets.symmetric(horizontal: 5.0),
                           child : GestureDetector(
-                            child: new Image.network(
+                            child: new FadeInImage.assetNetwork(
+                              placeholder: 'assets/source.gif',
+                              image :
                               i,
                               fit: BoxFit.fill,
                             ),
