@@ -3,6 +3,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:catalytic_collector/services/databaseuser.dart';
 import 'package:catalytic_collector/screens/home/showimage.dart';
+import 'package:catalytic_collector/shared/loadingcar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class Itempage3 extends StatefulWidget {
   List photo;
@@ -20,13 +22,13 @@ class Itempage3 extends StatefulWidget {
 }
 
 class Itempage3State extends State<Itempage3> {
-   var _itemCount= 0;
+   var _itemCount= 1;
    var total ;
 
   @override
 
   Widget build(BuildContext context) {
-    if (_itemCount==0){
+    if (_itemCount==1){
       total= widget.price;
     }
 
@@ -45,12 +47,14 @@ class Itempage3State extends State<Itempage3> {
                           width: MediaQuery.of(context).size.width,
                           margin: new EdgeInsets.symmetric(horizontal: 5.0),
                           child : GestureDetector(
-                            child: new FadeInImage.assetNetwork(
-                              placeholder: 'assets/source.gif',
-                              image :
-                              i,
+                            child:CachedNetworkImage(
+                              imageUrl: i,
+                              placeholder: (context, url) => Loadingcar(),
                               fit: BoxFit.fill,
-                            ),
+
+                            )
+
+,
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => Showimage(url :i)));
                             },
@@ -106,7 +110,7 @@ class Itempage3State extends State<Itempage3> {
                   mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
 
-                _itemCount != 0 ? new IconButton(icon: new Icon(Icons.remove), onPressed: () => setState((){
+                _itemCount != 1 ? new IconButton(icon: new Icon(Icons.remove), onPressed: () => setState((){
 
                   _itemCount--;
                   total= (_itemCount*double.parse(widget.price)).toStringAsFixed(1);

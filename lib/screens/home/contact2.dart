@@ -246,7 +246,7 @@ class HomeScreenBottomPart extends StatelessWidget {
 
   ];
 
-  List<String> titles = ["Facebook", "Youtube", "Instagram", "Twitter"];
+  List<String> titles = ["Facebook", "Instagram", "Youtube", "Twitter"];
 
   List<Widget> movies() {
     List<Widget> movieList = new List();

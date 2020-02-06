@@ -3,7 +3,7 @@ import 'package:catalytic_collector/screens/home/final.dart';
 import 'package:catalytic_collector/screens/home/search2.dart';
 import 'package:catalytic_collector/screens/home/search4.dart';
 import 'package:flutter/material.dart';
-import 'home/brand.dart';
+import 'home/brand2.dart';
 import 'home/droplist.dart';
 import 'home/home.dart';
 import 'home/search3.dart';
@@ -25,7 +25,7 @@ class Template extends StatefulWidget {
 
 class TemplateState extends State<Template> {
   int _selectedTab = 0;
-  final _pageOptions = [Final(), Brand(), About(), Contact2()];
+  final _pageOptions = [Final(), Brand2(), About(), Contact2()];
 
   @override
   Widget build(BuildContext context) {

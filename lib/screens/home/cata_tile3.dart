@@ -12,6 +12,8 @@ import 'package:catalytic_collector/screens/home/itempage3.dart';
 import 'package:catalytic_collector/services/databaseuser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:catalytic_collector/shared/loadingcar.dart';
 
 
 class CataTile3 extends StatefulWidget {
@@ -127,10 +129,13 @@ class CataTile3State extends State <CataTile3> {
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.fromLTRB(20.0, 20, 20.0, 5),
-                    child: FadeInImage.assetNetwork(
-                      placeholder: 'assets/source.gif',
-                      image:  widget.tofastphoto()[0],
-                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: widget.tofastphoto()[0],
+                      placeholder: (context, url) => Loadingcar(),
+
+                    )
+
+,
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 5),
