@@ -38,6 +38,7 @@ class ItemtoshowState extends State<Itemtoshow> {
 
             return Scaffold(
                 appBar: AppBar(
+                  backgroundColor: Colors.lightBlue,
                   title: Text("Your Items"),
                 ),
                 body: new ListView.builder(

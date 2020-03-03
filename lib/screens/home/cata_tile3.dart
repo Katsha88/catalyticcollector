@@ -14,6 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:catalytic_collector/shared/loadingcar.dart';
+import 'package:catalytic_collector/models/branduser.dart';
 
 
 class CataTile3 extends StatefulWidget {
@@ -21,6 +22,7 @@ class CataTile3 extends StatefulWidget {
   final Parameter para;
   final Currencyuser currency;
   final List favorites;
+  final List <Branduser> companies;
 
 
 
@@ -60,7 +62,7 @@ class CataTile3 extends StatefulWidget {
   }
 
 
-  CataTile3({Key key , this.cata, this.para, this.currency, this.favorites }) :super(key:key) ;
+  CataTile3({Key key , this.cata, this.para, this.currency, this.favorites , this.companies}) :super(key:key) ;
 
   @override
   State<StatefulWidget> createState() {
@@ -100,6 +102,20 @@ class CataTile3State extends State <CataTile3> {
 
         }}}
 
+ getphoto(){
+
+   if(widget.cata["Categories"]!= "NONE") {
+     for (int j = 0; j < widget.companies.length; j++) {
+       if (widget.companies[j].name == widget.cata["Categories"]) {
+         return widget.companies[j].photo;
+       }
+     }
+   }
+   else {
+     return "https://i0.wp.com/catalyticcollector.com/wp-content/uploads/2019/09/Default-1.jpg";
+   }
+    }
+
 
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
@@ -126,17 +142,50 @@ class CataTile3State extends State <CataTile3> {
               elevation: 16,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+
                 children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.fromLTRB(20.0, 20, 20.0, 5),
-                    child: CachedNetworkImage(
-                      imageUrl: widget.tofastphoto()[0],
-                      placeholder: (context, url) => Loadingcar(),
 
-                    )
+                  Stack( children: <Widget>[
+                    Container(
 
-,
-                  ),
+                      padding: EdgeInsets.fromLTRB(20.0, 20, 20.0, 5),
+                      child: Align(
+                        alignment: Alignment.center,
+                      child:
+                      CachedNetworkImage(
+                        imageUrl: widget.tofastphoto()[0],
+                        placeholder: (context, url) => Loadingcar(),
+
+
+
+                      )
+
+                        ,
+                      )
+
+
+
+                      ,
+                    ),
+
+                    Container(
+                        padding: EdgeInsets.fromLTRB(10, 0.0, 0, 0),
+
+                        width: 90,
+                        height: 90,
+
+                        child: CachedNetworkImage(
+
+                          imageUrl: getphoto(),
+                          placeholder: (context, url) => Loadingcar(),
+
+                        )
+                    ),
+                  ],
+
+
+                  ) ,
+
                   Container(
                     padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 5),
                     child: Text(
@@ -210,6 +259,9 @@ class CataTile3State extends State <CataTile3> {
 
                     ),
 
+
+
+
                   ],
 
                   ),
@@ -218,14 +270,6 @@ class CataTile3State extends State <CataTile3> {
               ))),
     );
   }
-
-
-
-
-
-
-
-
 
 
 }

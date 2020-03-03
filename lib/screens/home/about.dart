@@ -72,14 +72,22 @@ class About extends StatelessWidget {
         ),
         body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
+            child:
+                Container(
+                  padding: EdgeInsets.fromLTRB(10, 15, 10, 5),
+                    child: Text("You can be our partner, we have been working on catalytic converter since 2005. Evaluating used catalytic converter materials fairly is a considerable challenge. At first glance, their value prices are updating daily to reflect the material value. Our online catalogue (www.catalyticcollector.com) , containing more than 16,000 types of catalytic converter, is The best of the most complete databases on the market, creating much needed transparency in used catalysts. Selling used catalytic converters become much easier and our global network of agents can ensure our services to customers, wherever they are, appropriately and cost-effectively. As a scrap catalyst buyer, we can tell you that 97% of scrap catalytic converters have a reactive surface containing valuable metals including platinum, palladium or rhodium. catalyticcollector Company in malaysia has both deep expertise and technical knowledge that can maximize the renewal of precious metals through our recycling process. Transparency and trust are paramount in this industry so we have developed a catalogue that allows you to check the purchase prices we offer for each used catalytic converter. You can thus witness the purchase process serenely. Based on your location, we suggest you different slots for the collection of your material. After appraisal and payment for your used catalysts, we can issue all the documentation you need. If we are not able to provide you with our collection service, we have partners in the many countryis around the world and we can connect you with scrap converters buyers and DPF buyers… We also have a mailing/shipping service, but you need to follow precisely the process below Our online catalogue enables you to estimate the value of your old catalytic converters. Thanks to an algorithm we have set up, prices are updateing daily to reflect the material value. Thus, you can be sure to get the best possible price for your old catalytic converter!"
 
-            child: Text("You can be our partner, we have been working on catalytic converter since 2005. Evaluating used catalytic converter materials fairly is a considerable challenge. At first glance, their value prices are updating daily to reflect the material value. Our online catalogue (www.catalyticcollector.com) , containing more than 16,000 types of catalytic converter, is The best of the most complete databases on the market, creating much needed transparency in used catalysts. Selling used catalytic converters become much easier and our global network of agents can ensure our services to customers, wherever they are, appropriately and cost-effectively. As a scrap catalyst buyer, we can tell you that 97% of scrap catalytic converters have a reactive surface containing valuable metals including platinum, palladium or rhodium. catalyticcollector Company in malaysia has both deep expertise and technical knowledge that can maximize the renewal of precious metals through our recycling process. Transparency and trust are paramount in this industry so we have developed a catalogue that allows you to check the purchase prices we offer for each used catalytic converter. You can thus witness the purchase process serenely. Based on your location, we suggest you different slots for the collection of your material. After appraisal and payment for your used catalysts, we can issue all the documentation you need. If we are not able to provide you with our collection service, we have partners in the many countryis around the world and we can connect you with scrap converters buyers and DPF buyers… We also have a mailing/shipping service, but you need to follow precisely the process below Our online catalogue enables you to estimate the value of your old catalytic converters. Thanks to an algorithm we have set up, prices are updateing daily to reflect the material value. Thus, you can be sure to get the best possible price for your old catalytic converter!"
-          ,  style: TextStyle(
-                fontWeight: FontWeight.bold,
+                      ,  style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16
 
 
-            ),
-            )
+                      ),
+                    )
+                )
+
+
+
 
         ),
       )

@@ -41,6 +41,7 @@ class  FavoritesState extends State<Favorites> {
 
             return Scaffold(
                 appBar: AppBar(
+                  backgroundColor: Colors.lightBlue,
                   title: Text("Your Favorites"),
 
 

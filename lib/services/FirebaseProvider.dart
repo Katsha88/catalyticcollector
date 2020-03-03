@@ -39,11 +39,10 @@ class FirebaseProvider {
       return (await Firestore.instance
           .collection("Items")
           .where("Categories", isEqualTo: k)
-
+          .orderBy("Meta: meta_title")
           .endAt([l+ '\uf8ff'])
           .startAfterDocument(documentList[documentList.length - 1])
           .limit(10)
-          .orderBy("Meta: meta_title")
           .getDocuments())
           .documents;}
 
@@ -52,8 +51,7 @@ class FirebaseProvider {
 
 
   Future<List<DocumentSnapshot>> fetchEntryList(String l, String k) async {
-    print(l);
-print(k);
+
 if (k == "All") {
   return (await Firestore.instance
       .collection("Items")
@@ -72,7 +70,7 @@ else{
       .orderBy("Meta: meta_title")
       .startAt([l])
       .endAt([l + '\uf8ff'])
-      .limit(20)
+      .limit(10)
       .getDocuments())
       .documents;
 

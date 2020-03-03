@@ -27,6 +27,7 @@ import 'package:catalytic_collector/screens/home/itemtoshow.dart';
 import 'package:catalytic_collector/screens/home/favorites.dart';
 import 'package:catalytic_collector/screens/home/cata_list.dart';
 import 'package:catalytic_collector/screens/home/bloc.dart';
+import 'package:catalytic_collector/screens/home/brandgrid.dart';
 
 class Final extends StatefulWidget {
   @override
@@ -117,14 +118,14 @@ class FinalState extends State<Final> {
   List<DropdownMenuItem<Company>> _dropdownMenuItems;
   Company _selectedCompany;
   static String todata;
-  int i = Brand.j;
+  //int i = BrandgridState.j;
   int total1;
 
 
   @override
   void initState() {
     _dropdownMenuItems = buildDropdownMenuItems(_companies);
-    _selectedCompany = _dropdownMenuItems[i].value;
+   // _selectedCompany = _dropdownMenuItems[i].value;
     todata = _selectedCompany.name;
     total1 =0;
 
@@ -173,9 +174,7 @@ class FinalState extends State<Final> {
 
   @override
   Widget build(BuildContext context) {
-    print("number of call");
-    total1 = total1 +5;
-    print("d");
+
     User1 user = Provider.of<User1>(context);
 
     return StreamBuilder<UserData1>(
@@ -226,6 +225,7 @@ class FinalState extends State<Final> {
                                         children: <Widget>[
                                           Expanded(
                                             child: TextFormField(
+                                              textCapitalization: TextCapitalization.sentences,
                                               decoration:
                                                   textInputDecoration.copyWith(
                                                       hintText:

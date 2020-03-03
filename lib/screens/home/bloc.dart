@@ -19,12 +19,12 @@ class MovieListBloc {
 
 
   BehaviorSubject<List<DocumentSnapshot>> movieController;
-  ReplaySubject <List<DocumentSnapshot>> entry;
+
 
   BehaviorSubject<bool> showIndicatorController;
 
   MovieListBloc({this.toshorten, this.searchitem}) {
-    entry= ReplaySubject <List<DocumentSnapshot>>();
+
         movieController = BehaviorSubject<List<DocumentSnapshot>>();
     showIndicatorController = BehaviorSubject<bool>();
     firebaseProvider =
@@ -88,6 +88,7 @@ class MovieListBloc {
       try {
         if (documentList.length == 0) {
           movieController.sink.addError("No Data Available");
+
           updateIndicator(false);
         }
       } catch (e) {

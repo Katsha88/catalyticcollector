@@ -35,6 +35,7 @@ class Itempage3State extends State<Itempage3> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Selling page"),
+          backgroundColor: Colors.lightBlue,
         ),
         body: ListView(
           children: <Widget>[

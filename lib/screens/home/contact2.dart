@@ -233,7 +233,7 @@ class HomeScreeTopPart extends StatelessWidget {
 
 class HomeScreenBottomPart extends StatelessWidget {
   _launchChannel() async {
-    const url = "https://www.youtube.com/user/baseerah2016/videos";
+    const url = "";
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -255,8 +255,8 @@ class HomeScreenBottomPart extends StatelessWidget {
       var movieitem = Padding(
         padding: EdgeInsets.symmetric(vertical: 25.0, horizontal: 12.0),
         child: Container(
-          height: 220.0,
-          width: 135.0,
+          height:55,
+          width: 140.0,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               color: Colors.white,
@@ -275,7 +275,7 @@ class HomeScreenBottomPart extends StatelessWidget {
                 child: Image.asset(
                   images[i],
                   width: double.infinity,
-                  height: 130.0,
+                  height: 140.0,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -298,8 +298,8 @@ class HomeScreenBottomPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      height: 360.0,
-      margin: EdgeInsets.only(left: 65.0),
+      height: 250.0,
+      margin: EdgeInsets.only(left: 20),
       child: Column(
         children: <Widget>[
           Padding(
@@ -317,7 +317,7 @@ class HomeScreenBottomPart extends StatelessWidget {
             ),
           ),
           Container(
-            height: 250.0,
+            height: 220.0,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: movies(),

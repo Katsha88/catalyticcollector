@@ -26,7 +26,7 @@ class Brandgrid extends StatefulWidget {
   }
 }
 class BrandgridState extends State <Brandgrid> {
-  static int j = 0;
+  static String j = "All";
 
   Widget build(BuildContext context) {
     final brand = Provider.of<List<Brandclass>>(context) ?? [];
@@ -54,7 +54,7 @@ class BrandgridState extends State <Brandgrid> {
           ),
           onTap: () {
             FinalState.itemsearch = "";
-            j = index + 1;
+            j = brand[index].name;
 
             Navigator.push(
               context,
